@@ -284,5 +284,85 @@ namespace GCDPF
             }
             return this;
         }
+
+        private static void EEAPUnreduced(Polynomial a, Polynomial b, out Polynomial d, out Polynomial x, out Polynomial y, int field)//Extended Euclidean algorithm in finite field
+        {
+            Polynomial s;
+            if (b.IsNull)
+            {
+                d = a;
+                x = new Polynomial(new int[] { a.Values[0] });
+                y = new Polynomial(new int[] { 0 });
+
+                return;
+            }
+            EEAPUnreduced(b, PDF(a, b, field).remainder, out d, out x, out y, field);
+
+            s = y;
+            y = x - (y * PDF(a, b, field).quotient.ToField(field));
+            x = s;
+        }
+
+        /// <summary>
+        /// Расширенный алгоритм Евклида в поле
+        /// Возвращает НОД в приведенном виде
+        /// </summary>
+        public static void EEAP(Polynomial a, Polynomial b, out Polynomial d, out Polynomial x, out Polynomial y, int field, bool needReduce = true) //Extended Euclidean algorithm in finite field (reduced)
+        {
+            Polynomial s;
+            Polynomial ax;
+            Polynomial by;
+            int d_const;
+            int xy_const;
+            Polynomial tmp;
+            if (a.Length < b.Length)
+            {
+                tmp = a;
+                a = b;
+                b = tmp;
+            }
+
+            EEAPUnreduced(a, b, out d, out x, out y, field);
+            if (d.Values[d.Degree] != 1 && needReduce)
+            {
+                d_const = d.Values[d.Degree].ReverseMul(field);
+                d = d * new Polynomial(new int[] { d_const });
+                d = d.ToField(field);
+            }
+            ax = a * x;
+            by = b * y;
+            s = (ax + by).ToField(field);
+
+            xy_const = s.Values[s.Degree].ReverseMul(field);
+
+            x = x * new Polynomial(new int[] { xy_const });
+            x = x.ToField(field);
+            y = y * new Polynomial(new int[] { xy_const });
+            y = y.ToField(field);
+        }
+
+        /// <summary>
+        /// Расширенный алгоритм Евклида
+        /// </summary>
+        /// <param name="d">НОД</param>
+        /// <param name="x">Множитель сообтошения Безу для a</param>
+        /// <param name="y">Множитель сообтошения Безу для b</param>
+        public static void EEA(int a, int b, out int d, out int x, out int y)
+        {
+            if (b == 0)
+            {
+                d = a;
+                x = 1;
+                y = 0;
+                return;
+            }
+            EEA(b, a % b, out d, out x, out y);
+            int tmp;
+            tmp = y;
+            y = x - (a / b) * (y);
+            x = tmp;
+        }
+
+
     }
 }
