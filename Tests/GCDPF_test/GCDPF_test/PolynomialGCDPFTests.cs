@@ -79,7 +79,7 @@ namespace GCDPFTest
         [Test, TestCaseSource(typeof(GCDFTestCase), "GCDFDataToTest")]
         public void GCDFTest(GCDFTestCase testCase)
         {
-            var result = PolumonialGCDF.GCDF(testCase.a, testCase.b, testCase.field);
+            var result = Polynomial.GCDF(testCase.a, testCase.b, testCase.field);
             Assert.AreEqual(testCase.GCD, result);
         }
     }

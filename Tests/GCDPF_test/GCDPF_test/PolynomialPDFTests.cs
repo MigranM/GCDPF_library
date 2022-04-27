@@ -89,7 +89,7 @@ namespace GCDPFTest
         [Test, TestCaseSource(typeof(PDFTestCase), "PDFDataToTest")]
         public void PDFTest(PDFTestCase testCase)
         {
-            var result = PolumonialGCDF.PDF(testCase.dividend, testCase.divider, testCase.field);
+            var result = Polynomial.PDF(testCase.dividend, testCase.divider, testCase.field);
             Assert.AreEqual(testCase.quotient, result.quotient);
             Assert.AreEqual(testCase.remainder, result.remainder);
         }
@@ -101,14 +101,14 @@ namespace GCDPFTest
             Polynomial b = new Polynomial(new int[1] { 1 });
             Polynomial quotient = new Polynomial();
             Polynomial remainder = new Polynomial();
-            Assert.AreEqual((quotient, remainder), PolumonialGCDF.PDF(a, b, 10));
+            Assert.AreEqual((quotient, remainder), Polynomial.PDF(a, b, 10));
         }
         [Test]
         public void PDFExceptionTest()
         {
             Polynomial a = new Polynomial();
             Polynomial b = new Polynomial(new int[1]);
-            Assert.Catch(typeof(DivideByZeroException), () => PolumonialGCDF.PDF(b, a, 10));
+            Assert.Catch(typeof(DivideByZeroException), () => Polynomial.PDF(b, a, 10));
         }
 
     }
