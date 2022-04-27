@@ -17,6 +17,8 @@ namespace GCDPFTest
         [Test]
         public void ReverseNulArgumentException()
         {
+            Assert.Throws<ArgumentException>(() => { 0.ReverseMul(0); });
+            Assert.Throws<ArgumentException>(() => { 0.ReverseMul(3); });
             Assert.Throws<ArgumentException>(() => { 4.ReverseMul(20); });
             Assert.Throws<ArgumentException>(() => { 5.ReverseMul(20); });
             Assert.Throws<ArgumentException>(() => { 25.ReverseMul(100); });
