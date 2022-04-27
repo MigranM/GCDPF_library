@@ -10,6 +10,8 @@ namespace GCDPF
     {
         public static int ReverseMul(this Int32 b, int field)
         {
+            if (field == 0) throw new ArgumentException("Field can not be zero");
+            if (b == 0) throw new ArgumentException("Can not find reverse element for zero");
 
             int rev_b;
             int d;
