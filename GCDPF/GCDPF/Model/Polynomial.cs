@@ -259,7 +259,7 @@ namespace GCDPF
                 b = tmp;
             }
             a = PDF(a, b, field).remainder;
-            while (a.Length > 1 && b.Length > 1)
+            while (!a.IsNull && !b.IsNull)
             {
                 if (a.Degree > b.Degree)
                 {
