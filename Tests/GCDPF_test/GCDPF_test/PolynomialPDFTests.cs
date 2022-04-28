@@ -54,6 +54,16 @@ namespace GCDPFTest
                         );
                     yield return new PDFTestCase
                         (
+                            new Polynomial(new int[] { 1, 3, 2 }),
+                            new Polynomial(new int[] { 2, 3 }),
+                            5,
+                            (
+                                new Polynomial(new int[] { 3, 2 }),
+                                new Polynomial(new int[] { 1 })
+                            )
+                        );
+                    yield return new PDFTestCase
+                        (
                             new Polynomial(new int[] { 6, 0, -2, 7 }),
                             new Polynomial(new int[] { 4, 3, 0 }),
                             11,

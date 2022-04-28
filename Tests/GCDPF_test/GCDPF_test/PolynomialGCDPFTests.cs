@@ -60,6 +60,13 @@ namespace GCDPFTest
                         );
                     yield return new GCDFTestCase
                         (
+                            new Polynomial(new int[] { 1, 3, 2 }),
+                            new Polynomial(new int[] { 2, 3 }),
+                            5,
+                            new Polynomial(new int[] { 1 }).Simplify(5)
+                        );
+                    yield return new GCDFTestCase
+                        (
                             new Polynomial(new int[] { 2, 5, 7, 10, 6 }),
                             new Polynomial(new int[] { 1, 2, 3, 4, 2 }),
                             5,
